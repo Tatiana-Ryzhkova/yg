@@ -1,6 +1,7 @@
 package framework.pages;
 
 import framework.Framework;
+import framework.areas.CookiesAcceptArea;
 import framework.areas.LeftMenuArea;
 import framework.areas.LeftMenuUserAddition;
 import framework.areas.UserBlockArea;
@@ -11,6 +12,7 @@ public class WelcomePopup extends  Page {
     public LeftMenuArea leftMenuArea = Framework.getArea(LeftMenuArea.class);
     public LeftMenuUserAddition leftMenuUser = Framework.getArea(LeftMenuUserAddition.class);
     public UserBlockArea userBlock = Framework.getArea(UserBlockArea.class);
+    public CookiesAcceptArea cookiesAcceptArea = Framework.getArea(CookiesAcceptArea.class);
 
     public WelcomePopup() {
         super();

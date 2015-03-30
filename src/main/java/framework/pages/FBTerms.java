@@ -2,6 +2,7 @@ package framework.pages;
 
 
 import framework.Framework;
+import framework.areas.CookiesAcceptArea;
 import framework.areas.LeftMenuArea;
 import framework.areas.LeftMenuUserAddition;
 import framework.areas.UserBlockArea;
@@ -13,6 +14,7 @@ public class FBTerms extends Page {
     public LeftMenuArea leftMenuArea = Framework.getArea(LeftMenuArea.class);
     public LeftMenuUserAddition leftMenuUser = Framework.getArea(LeftMenuUserAddition.class);
     public UserBlockArea userBlock = Framework.getArea(UserBlockArea.class);
+    public CookiesAcceptArea cookiesAcceptArea = Framework.getArea(CookiesAcceptArea.class);
 
     public FBTerms() {
         super();
@@ -20,7 +22,7 @@ public class FBTerms extends Page {
     }
 
     public FBTerms verifyTextIsPresent (String text) {
-        if (this.pageSource().contains(text)) {
+        if (this.pageSourceContainText(text)) {
             System.out.println("Text: \"" + text + "\", - is present on the page");
         } else throw new NoSuchElementException("Error!! There is no such text on the page");
         return  this;

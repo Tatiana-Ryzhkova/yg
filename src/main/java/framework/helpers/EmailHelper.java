@@ -26,9 +26,9 @@ public class EmailHelper {
     public void emailAuth() {
         this.openEmailAuth();
         this
-            .enterEmail()
-            .enterPswrd()
-            .submitForm();
+                .enterEmail()
+                .enterPswrd()
+                .submitForm();
     }
 
     public String getValidEmail() {

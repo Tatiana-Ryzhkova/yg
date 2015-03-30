@@ -33,11 +33,16 @@ public class LeftMenuArea extends Area {
         return this;
     }
 
-    public void sortMostRecent() {
-        this.clickFilterBtn().getElement("lmaSortRecent").click();
+    public void clickMostRecent() {
+        this.getElement("lmaSortRecent").click();
     }
 
-    public void sortMostViewed() {
+    public void sortMostRecent() {
+        this.clickFilterBtn().clickMostRecent();
+        this.clickFilterBtn();
+    }
+
+    public void clickMostViewed() {
         this.clickFilterBtn().getElement("lmaSortViewed").click();
     }
 

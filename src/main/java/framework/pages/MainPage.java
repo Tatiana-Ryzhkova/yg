@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 
 public class MainPage extends Page {
 
+    public CookiesAcceptArea cookiesAcceptArea = Framework.getArea(CookiesAcceptArea.class);
     /**
      * Areas for visitor main page
      */
@@ -21,6 +22,7 @@ public class MainPage extends Page {
     public LeftMenuUserAddition leftMenuUser = Framework.getArea(LeftMenuUserAddition.class);
     public UserBlockArea userBlock = Framework.getArea(UserBlockArea.class);
     public UploadArea uploadArea = Framework.getArea(UploadArea.class);
+    public EditPhotoArea editPhotoArea = Framework.getArea(EditPhotoArea.class);
 
     public MainPage() {
         super();

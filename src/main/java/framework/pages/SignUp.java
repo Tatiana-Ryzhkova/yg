@@ -1,6 +1,7 @@
 package framework.pages;
 
 import framework.Framework;
+import framework.areas.CookiesAcceptArea;
 import framework.areas.LeftMenuArea;
 import framework.areas.VisitorBlockArea;
 import org.openqa.selenium.WebElement;
@@ -12,6 +13,7 @@ public class SignUp extends Page{
 
     public VisitorBlockArea visitorBlock = Framework.getArea(VisitorBlockArea.class);
     public LeftMenuArea leftMenuArea = Framework.getArea(LeftMenuArea.class);
+    public CookiesAcceptArea cookiesAcceptArea = Framework.getArea(CookiesAcceptArea.class);
 
     public SignUp() {
         super();

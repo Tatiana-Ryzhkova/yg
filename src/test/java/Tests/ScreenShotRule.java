@@ -2,7 +2,6 @@ package Tests;
 
 import framework.Framework;
 import org.apache.commons.io.FileUtils;
-import org.apache.xpath.SourceTree;
 import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
 import org.openqa.selenium.OutputType;

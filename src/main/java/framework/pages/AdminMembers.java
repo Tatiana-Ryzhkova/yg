@@ -67,15 +67,23 @@ public class AdminMembers extends Page{
         return this;
     }
 
-    public String getUserIdFromGridByEmail (String userEmail) {
+    public boolean isUserInTheGrid (String userEmail) {
         this.filterUserByEmail(userEmail);
-         String userID = null;
         try {
-            userID = this.getDriver().findElement(By.xpath(getPathForUserIdByEmail(userEmail))).getText();
-        } catch (NoSuchElementException e) {
-            System.out.println("ERROR! Wrong element locator. Verify element Xpath");
+            this.getDriver().findElement(By.xpath(getPathForUserIdByEmail(userEmail)));
+            return true;
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+            System.out.println("WARNING!! There is no user with such email in the grid");
+            return false;
         }
-        return userID;
+    }
+
+    public String getUserIdFromGridByEmail (String userEmail) {
+        String userId = null;
+        if (this.isUserInTheGrid(userEmail)) {
+            userId = this.getDriver().findElement(By.xpath(getPathForUserIdByEmail(userEmail))).getText();
+        }
+        return userId;
     }
 
     public void deleteUserFromDB (String userEmail) {
@@ -89,6 +97,7 @@ public class AdminMembers extends Page{
         } catch (org.openqa.selenium.NoSuchElementException e) {
 
         }
+        Framework.getInstance().sleep(1000);
         this.getElement("amEmailFilterAll").click();
         try {
             this.getElement("amEmailFilterInput");

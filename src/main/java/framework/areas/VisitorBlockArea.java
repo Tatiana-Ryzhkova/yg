@@ -1,6 +1,8 @@
 package framework.areas;
 
 
+import framework.Framework;
+
 public class VisitorBlockArea extends  LeftMenuArea {
 
     public void clickUploadBtn() {
@@ -43,6 +45,7 @@ public class VisitorBlockArea extends  LeftMenuArea {
         this.clickLoginBtn();
         this.fillPopupUsername(username);
         this.fillPopupPassword(password);
+        Framework.getInstance().sleep(500);
         this.clickPopupLoginBtn();
     }
 

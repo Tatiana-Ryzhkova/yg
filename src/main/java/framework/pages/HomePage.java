@@ -3,7 +3,6 @@ package framework.pages;
 import framework.Framework;
 import org.openqa.selenium.ElementNotVisibleException;
 
-import java.awt.*;
 import java.util.NoSuchElementException;
 
 public class HomePage extends Page {
@@ -31,19 +30,19 @@ public class HomePage extends Page {
 
     public HomePage verifyHPElement(String element) {
         if (this.getElement(element).isDisplayed()) {
-                System.out.println("Element \"" + element +
-                        "\" is visible and displayed properly");
+            System.out.println("Element \"" + element +
+                    "\" is visible and displayed properly");
         } else throw new ElementNotVisibleException("Error!! Element is not visible");
         return this;
     }
 
     public HomePage verifyTextIsPresent (String text) {
         try{
-            this.pageSource().contains(text);
+            this.pageSourceContainText(text);
         } catch (org.openqa.selenium.NoSuchElementException e){
             Framework.getInstance().waitWhileLoad();
         }
-        if (this.pageSource().contains(text)) {
+        if (this.pageSourceContainText(text)) {
             System.out.println("Text: \"" + text + "\", - is present on the page");
         } else throw new NoSuchElementException("Error!! There is no such text on the page");
         return  this;

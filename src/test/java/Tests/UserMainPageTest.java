@@ -18,18 +18,10 @@ public class UserMainPageTest {
     public void openBrowser() {
         MainPage mainPage = Framework.getPage(MainPage.class);
         mainPage.open();
+        Framework.getInstance().waitWhileLoad();
     }
 
-    /*@Test
-    public void test() {
-        AdminPage a = Framework.getPage(AdminPage.class);
-        a.open();
-        AdminMembers m = Framework.getPage(AdminMembers.class);
-        m.selectChangeStatusBox("okorobeinyk+1418211439068@hypnorep.com");
-        System.out.println("Enable option path: " + m.getEnableOptionPath("okorobeinyk+1418211439068@hypnorep.com"));
-        System.out.println("Disable option path: " + m.getDisableOptionPath("okorobeinyk+1418211439068@hypnorep.com"));
 
-    }*/
 }
 
 

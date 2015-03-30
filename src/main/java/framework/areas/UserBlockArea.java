@@ -1,6 +1,8 @@
 package framework.areas;
 
 
+import framework.Framework;
+
 public class UserBlockArea extends Area {
 
     public void clickUploadBtn () {
@@ -18,8 +20,8 @@ public class UserBlockArea extends Area {
             try {
                 throw new Exception ();
             } catch (Exception e) {
-                    System.out.println("Error! Actual username does not contain expected username");
-                    e.printStackTrace();
+                System.out.println("Error! Actual username does not contain expected username");
+                e.printStackTrace();
             }
         } else {
             System.out.println("Actual username contains expected username");
@@ -55,7 +57,11 @@ public class UserBlockArea extends Area {
 
     public void clickMyArticles () {
         this.openUserMenu();
+        //FF default popup need to be closed
+        this.closeAlertPopup();
         this.getElement("ubaMyArticlesItem").click();
+        this.closeAlertPopup();
+        Framework.getInstance().waitWhileLoad();
     }
 
     public void clickReport () {
@@ -64,8 +70,10 @@ public class UserBlockArea extends Area {
     }
 
     public void clickLogout () {
+        this.closeAlertPopup();
         this.openUserMenu();
         this.getElement("ubaLogoutItem").click();
+        Framework.getInstance().sleep(3000);
     }
 
 }

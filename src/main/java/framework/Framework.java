@@ -2,20 +2,16 @@ package framework;
 
 import framework.areas.Area;
 import framework.pages.Page;
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import java.awt.*;
+import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.Transferable;
 import java.io.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -26,8 +22,10 @@ public class Framework {
 
     protected Properties configProperty;
     protected final String mainPath = "src/main/java/";
+
     protected final String propPath = "framework/properties/";
     protected final String testDataPath = "framework/testdata/";
+    //protected String ffProfilePath = "framework/profileYGAutomation";
     protected String defaultPropName = "Default";
 
     protected WebDriver driver = null;
@@ -107,6 +105,7 @@ public class Framework {
             if(this.getConfig("browser").equals("ie")) {
                 this.driver = new InternetExplorerDriver();
             } else if(this.getConfig("browser").equals("chrome")) {
+                System.setProperty("webdriver.chrome.driver", this.getPropertyDirPath() + "chromedriver.exe");
                 this.driver = new ChromeDriver();
             } else {
 
@@ -125,6 +124,10 @@ public class Framework {
 
     public  void waitWhileLoad() {
         this.getDriver().manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+    }
+
+    public void waitWhileLoad (int seconds) {
+        this.getDriver().manage().timeouts().implicitlyWait(seconds, TimeUnit.SECONDS);
     }
 
     public void sleep() {
@@ -199,7 +202,8 @@ public class Framework {
     }
 
     public void setContentsToClipboard (Transferable contentsToClipboard) {
-        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(contentsToClipboard, null);
+        Clipboard clpbrd = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clpbrd.setContents(contentsToClipboard, null);
     }
 
 

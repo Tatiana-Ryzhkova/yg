@@ -5,7 +5,6 @@ import framework.areas.Area;
 import org.openqa.selenium.*;
 
 import java.util.*;
-import java.util.NoSuchElementException;
 
 
 public class Page extends Area {
@@ -37,6 +36,7 @@ public class Page extends Area {
         } catch (Exception e) {
             System.out.println("Can't open page with url :" + this.pageURL );
         }
+        Framework.getInstance().sleep(2000);
     }
 
     /**
@@ -62,13 +62,22 @@ public class Page extends Area {
         return "user" + new Date().getTime();
     }
 
+    public String generateText() {
+        return "uniqueText" + new Date().getTime();
+    }
+
+    public String generateTextWithWord (String word) {
+        return word + new Date().getTime();
+    }
+
     public String getValidationMessage(String forElement) {
         String message = this.getElement(forElement).getText();
         return message;
     }
 
     public Boolean verifyPageContainsValidation (String validationMessage) {
-        if (this.pageSource().contains(validationMessage)) {
+        Framework.getInstance().waitWhileLoad();
+        if (this.pageSourceContainText(validationMessage)) {
             return true;
         } else {
             return false;
@@ -93,6 +102,15 @@ public class Page extends Area {
 
     public String pageSource() {
         return this.getDriver().getPageSource();
+    }
+
+    public boolean pageSourceContainText(String text) {
+        Framework.getInstance().waitWhileLoad();
+        if (this.pageSource().contains(text)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

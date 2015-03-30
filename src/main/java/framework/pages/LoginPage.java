@@ -1,6 +1,7 @@
 package framework.pages;
 
 import framework.Framework;
+import framework.areas.CookiesAcceptArea;
 import framework.areas.LeftMenuArea;
 import framework.areas.VisitorBlockArea;
 import org.openqa.selenium.ElementNotVisibleException;
@@ -11,6 +12,7 @@ public class LoginPage extends Page{
 
     public VisitorBlockArea visitorBlock = Framework.getArea(VisitorBlockArea.class);
     public LeftMenuArea leftMenuArea = Framework.getArea(LeftMenuArea.class);
+    public CookiesAcceptArea cookiesAcceptArea = Framework.getArea(CookiesAcceptArea.class);
 
     public LoginPage() {
         super();
@@ -54,6 +56,7 @@ public class LoginPage extends Page{
     public LoginPage loginWithInvalidCredentials(String username, String password,
                                                  String validationMessage) {
         this.fillUsername(username).fillPassword(password).submitLogin();
+        Framework.getInstance().sleep(1000);
         if (!this.verifyPageContainsValidation(validationMessage)) {
             throw new NoSuchElementException("\"Error!! " +
                     "There is no such validation message on the page\"");
@@ -79,9 +82,10 @@ public class LoginPage extends Page{
      */
     public void loginWithValidDefaultCredentials() {
         this
-            .fillUsername(this.getTestUsername())
-            .fillPassword(this.getTestPassword())
-            .submitLogin();
+                .fillUsername(this.getTestUsername())
+                .fillPassword(this.getTestPassword())
+                .submitLogin();
+        Framework.getInstance().sleep(3000);
         if(!this.driver.getTitle().contains("YouGossip Home")) {
             throw new ElementNotVisibleException("\"Error!! " +
                     "User is not logged in\"");
@@ -94,6 +98,10 @@ public class LoginPage extends Page{
 
     public String getTestUserEmail() {
         return this.getPropertyValue("lpEmailDefault");
+    }
+
+    public String getTestUserId() {
+        return this.getPropertyValue("lpUserIdDefault");
     }
 
     public String getTestUsername() {

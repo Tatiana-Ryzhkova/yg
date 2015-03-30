@@ -98,6 +98,10 @@ public class FirstPhotoArea extends  Area {
         }
     }
 
+    public String getPhotoUploadDate() {
+        return this.getElementValue("fpaPhotoDate");
+    }
+
     public void clickComments() {
         this.getElement("fpaCommentsIcon").click();
     }
@@ -124,4 +128,23 @@ public class FirstPhotoArea extends  Area {
     public boolean verifyAddCommentIsDisplayed() {
         return this.getElement("fpaAddCommentArea").isDisplayed();
     }
+
+    public void clickDeleteIcon() {
+        this.getElement("fpaDeleteIcon").click();
+    }
+
+    public void clickEditIcon() {
+        this.getElement("fpaEditIcon").click();
+    }
+
+    public boolean isMatureTrue() {
+        boolean mature = true;
+        try {
+            this.getElement("fpaMature").isDisplayed();
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+            mature = false;
+        }
+        return mature;
+    }
+
 }

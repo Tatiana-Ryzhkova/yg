@@ -4,10 +4,11 @@ import framework.Framework;
 import org.openqa.selenium.*;
 
 import java.awt.*;
-import java.util.Arrays;
-import java.util.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.NoSuchElementException;
-import java.util.Properties;
 
 public class Area {
     protected WebDriver driver;
@@ -28,7 +29,6 @@ public class Area {
         this.commonProperties = this.framework.getProperty("Default");
         return this;
     }
-
 
     public Robot getRobot() {
         if (this.robot == null) {
@@ -120,11 +120,11 @@ public class Area {
             System.out.println("Element is visible and displayed properly");
         } else {
             Framework.getInstance().waitWhileLoad();
-        }
-        if (_element.isDisplayed()) {
-            System.out.println("Element is visible and displayed properly");
-        } else {
-            throw new ElementNotVisibleException("Error!! Element is not visible");
+            if (_element.isDisplayed()) {
+                System.out.println("Element is visible and displayed properly");
+            } else {
+                throw new ElementNotVisibleException("Error!! Element is not visible");
+            }
         }
         return this;
     }
@@ -142,8 +142,33 @@ public class Area {
 
     }
 
+    public void closeAlertPopup() {
+        try {
+            this.dismissAlertPopup(this.switchToAlertPopup());
+            this.switchBackToDefaultContent();
+        } catch (NoAlertPresentException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void switchToFrameByNameOrId (String frameNameOrId) {
+        this.driver.switchTo().frame(frameNameOrId);
+    }
+
+    public void switchToFrameByElement (String element) {
+        this.driver.switchTo().frame(this.getElement(element));
+    }
+
+    public void switchBackToDefaultContent() {
+        this.driver.switchTo().defaultContent();
+    }
+
     public void acceptAlertPopup (Alert alertPopup) {
         alertPopup.accept();
+    }
+
+    public void confirm() {
+        this.switchToAlertPopup().accept();
     }
 
     public String getElementValue (String elementLocator) {
@@ -155,6 +180,45 @@ public class Area {
             return Integer.parseInt(this.getElement(elementLocator).getText());
         } catch (NumberFormatException e) {
             return 0;
+        }
+    }
+
+    public Date getDateFromString (String dateString, String format) {
+        Date date = null;
+        try {
+            DateFormat dateFormat = new SimpleDateFormat(format, Locale.ENGLISH);
+            date = dateFormat.parse(dateString);
+        } catch (ParseException e) {
+            System.out.println("Error:  /n"+ e.getStackTrace());
+        }
+        return date;
+    }
+
+    public int compareDates (Date firstDate, Date compareWithDate) {
+        return firstDate.compareTo(compareWithDate);
+    }
+
+    public boolean isOlderDate (Date firstDate, Date compareWithDate) {
+        if (this.compareDates(firstDate, compareWithDate) < 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isNewerDate (Date firstDate, Date compareWithDate) {
+        if (this.compareDates(firstDate, compareWithDate) > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isTheSameDate (Date firstDate, Date compareWithDate) {
+        if (this.compareDates(firstDate, compareWithDate) == 0) {
+            return true;
+        } else {
+            return false;
         }
     }
 

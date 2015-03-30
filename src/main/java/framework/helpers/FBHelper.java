@@ -11,9 +11,9 @@ import java.util.Set;
 public class FBHelper {
 
     String testFBEmail = "soni4kad34@meta.ua";
-    String testFBPswrd = "********";
+    String testFBPswrd = "******";
     String newFBUsrnm = "okorobeinyk+1@hypnorep.com";
-    String newFBPswrd = "********";
+    String newFBPswrd = "*******";
 
     WebDriver driver =  Framework.getInstance().getDriver();
 

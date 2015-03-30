@@ -20,10 +20,12 @@ public class AdminLogin extends Page{
         try {
             this.getElement("alLoginField");
         } catch (NoSuchElementException e) {
+            throw new NoSuchElementException("Element " + "\"LoginField\"" + " is not visible");
         }
         this.setDataToElement("alLoginField", this.getPropertyValue("alTestLogin"));
         this.setDataToElement("alPswrdField", this.getPropertyValue("alTestPswrd"));
         this.getElement("alLoginBtn").click();
+        Framework.getInstance().sleep(2000);
     }
 
 

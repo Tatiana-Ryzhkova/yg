@@ -23,10 +23,12 @@ public class WelcomePopup extends  Page {
         this.getElement("welcomeCloseBtn").click();
     }
 
+    //is not available feature now
+    /*
     public void clickOutPopup() {
         this.getElement("wpOutPopup").click();
     }
-
+    */
     public void tryUpload() {
         this.getElement("wpTryUpload").click();
     }

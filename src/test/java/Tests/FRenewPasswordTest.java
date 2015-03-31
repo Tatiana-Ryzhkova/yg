@@ -94,7 +94,7 @@ public class FRenewPasswordTest {
     }
 
     @Test
-     public void testValidUserEmail_TC_WChA27() {
+    public void testValidUserEmail_TC_WChA27() {
         HomePage homePage = Framework.getPage(HomePage.class);
         homePage.clickSignUpBtn();
 
@@ -113,7 +113,6 @@ public class FRenewPasswordTest {
         forgotPage.open();
         Framework.getInstance().sleep(5000);
         forgotPage.submitEmail(testEmail);
-        System.out.print("Welcome popup: ");
         forgotPage.verifyElement("rpValidationSent");
 
         EmailHelper helper = new EmailHelper();
@@ -128,7 +127,7 @@ public class FRenewPasswordTest {
         mainPage.userBlock.verifyElement("ubaUsername");
         assertTrue(mainPage.userBlock.getUsername().contains("Doe"));
 
-     }
+    }
 
     @Test
     public void testDisabledUserEmail_TC_WChA28() {
@@ -153,6 +152,7 @@ public class FRenewPasswordTest {
         forgotPage.open();
 
         forgotPage.submitEmail(testEmail);
+        Framework.getInstance().sleep(3000);
         System.out.print("Validation mesage: ");
         forgotPage.verifyElement("rpValidation");
         assertTrue(forgotPage.getValidationMessage().contains("User was temporary blocked."));

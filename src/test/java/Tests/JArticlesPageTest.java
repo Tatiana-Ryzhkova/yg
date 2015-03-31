@@ -202,8 +202,10 @@ public class JArticlesPageTest {
         userPage.createArticle("Test search verifying by tag", tagForSearch);
         String tag = userPage.generateText();
         userPage.createArticle("New Title", tag);
+        Framework.getInstance().sleep(2000);
         assertTrue(userPage.firstArticleArea.verifyContainsTitleIsTrue("New Title"));
         userPage.makeSearch(tagForSearch);
+        Framework.getInstance().sleep(3000);
         assertTrue(userPage.firstArticleArea.verifyContainsTitleIsTrue("Test search verifying by tag"));
     }
 
@@ -220,7 +222,7 @@ public class JArticlesPageTest {
         assertTrue(userPage.firstArticleArea.verifyContainsTitleIsFalse(title));
     }
 
-   @Test
+    @Test
     public void verifySortingByDateOldest_WChM24() {
         this.loginWithDefaultCredentials();
         MainPage mainPage = Framework.getPage(MainPage.class);

@@ -147,7 +147,7 @@ public class Area {
             this.dismissAlertPopup(this.switchToAlertPopup());
             this.switchBackToDefaultContent();
         } catch (NoAlertPresentException e) {
-            e.printStackTrace();
+            System.out.println("No alert is present.");
         }
     }
 
